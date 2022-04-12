@@ -4,6 +4,7 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.annotations.*;
 import pages.BasePage;
 import pages.CartPage;
@@ -35,12 +36,17 @@ public class BaseTest {
             driver = new ChromeDriver();
         }
 
-        ChromeOptions options = new ChromeOptions();
-        options.addArguments("--headless");
-        driver = new ChromeDriver(options);
+        if(System.getProperty("browser", "chrome").equalsIgnoreCase("chrome")) {
+            WebDriverManager.chromedriver().setup();
+            ChromeOptions options = new ChromeOptions();
+            if (System.getProperty("headless").equals("true"))
+                options.addArguments("--headless");
+            driver = new ChromeDriver(options);
+        } else if(System.getProperty("browser", "chrome").equalsIgnoreCase("firefox")) {
+            driver = new FirefoxDriver();
+        }
 
-        if(System.getProperty("headless", "true").equals("true"))
-        options.addArguments("--headless");
+
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 
