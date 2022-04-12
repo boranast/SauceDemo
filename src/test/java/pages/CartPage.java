@@ -29,12 +29,8 @@ public class CartPage extends BasePage{
         driver.findElement(CONTINUE_SHOPPING_BUTTON).click();
     }
 
-    @Step("Removing a product {nameProduct} from the shopping cart")
-    public void removeProductFromCart(String nameProduct) {
-        driver.findElement(By.xpath(String.format(removeButton, nameProduct))).click();
-    }
 
-        @Test
+    @Test
     public void goToCheckout() {
         driver.findElement(CHECKOUT_BUTTON).click();
     }
@@ -42,5 +38,10 @@ public class CartPage extends BasePage{
     @Test
     public int getProductsCount() {
         return driver.findElements(PRODUCT_IN_CART).size();
+    }
+
+    @Test
+    public void removeProductFromCart(String product) {
+        driver.findElement(By.xpath(String.format(removeProductFromCart, product))).click();
     }
 }
