@@ -53,9 +53,10 @@ public class BaseTest {
         basePage = new BasePage(driver);
     }
 
-    @AfterMethod(alwaysRun = true)
+    @AfterMethod(alwaysRun = true, description = "Closing Browser")
     public void close() {
-        driver.quit();
-    }
+        if (driver != null) {
+            driver.quit();
+        }
 
 }
