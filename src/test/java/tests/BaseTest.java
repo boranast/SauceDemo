@@ -27,7 +27,7 @@ public class BaseTest {
     @Parameters({"browser"})
     @BeforeMethod
     public void setup(@Optional("chrome") String browser) throws MalformedURLException {
-        if(browser.equalsIgnoreCase("chrome")) {
+        if (browser.equalsIgnoreCase("chrome")) {
             WebDriverManager.chromedriver().setup();
             driver = new ChromeDriver();
         } else if (browser.equalsIgnoreCase("chrome")) {
@@ -53,4 +53,5 @@ public class BaseTest {
             driver.quit();
         }
 
+    }
 }
