@@ -38,6 +38,9 @@ public class BaseTest {
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--headless");
         driver = new ChromeDriver(options);
+
+        if(System.getProperty("headless", "true").equals("true"))
+        options.addArguments("--headless");
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 
