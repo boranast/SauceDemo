@@ -6,10 +6,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.annotations.*;
-import pages.BasePage;
-import pages.CartPage;
-import pages.LoginPage;
-import pages.ProductsPage;
+import pages.*;
 
 import java.net.MalformedURLException;
 import java.util.concurrent.TimeUnit;
@@ -22,6 +19,8 @@ public class BaseTest {
     ProductsPage productsPage;
     CartPage cartPage;
     BasePage basePage;
+    CheckoutPage checkoutPage;
+    String baseUrl = "https://www.saucedemo.com";
     public static final String USER = "standart_user";
     public static final String PASSWORD = "secret_sauce";
 

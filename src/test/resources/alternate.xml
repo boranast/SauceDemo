@@ -5,7 +5,6 @@
         <parameter name="browser" value="chrome"/>
         <classes>
             <class name="tests.CartTest"/>
-            <class name="tests.ProductsTest"/>
             <class name="tests.CheckoutTest"/>
             <class name="tests.LoginTest"/>
         </classes>
