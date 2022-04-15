@@ -13,11 +13,7 @@ public class CartTest extends BaseTest {
         productsPage.addToCart("Sauce Labs Backpack");
         productsPage.addToCart("Sauce Labs Bike Light");
         productsPage.addToCart("Sauce Labs Bolt T-Shirt");
-        /*
-        productsPage.removeProductFromCart("Sauce Labs Backpack");
-        cartPage.clickCart();
-        assertEquals(cartPage.getProductCount(), 2);
-        */
+
 
     }
 

@@ -5,6 +5,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.testng.ITestContext;
 import org.testng.annotations.*;
 import pages.*;
 
@@ -25,26 +26,17 @@ public class BaseTest {
     public static final String PASSWORD = "secret_sauce";
 
     @Parameters({"browser"})
-    @BeforeMethod
-    public void setup(@Optional("chrome") String browser) throws MalformedURLException {
+    @BeforeMethod(description = "Opening browser")
+    public void setup(@Optional("chrome") String browser, ITestContext testContext) {
         if (browser.equalsIgnoreCase("chrome")) {
             WebDriverManager.chromedriver().setup();
-            driver = new ChromeDriver();
-        } else if (browser.equalsIgnoreCase("chrome")) {
-            WebDriverManager.chromedriver().setup();
-            driver = new ChromeDriver();
-        }
-
-        if(System.getProperty("browser", "chrome").equalsIgnoreCase("chrome")) {
-            WebDriverManager.chromedriver().setup();
             ChromeOptions options = new ChromeOptions();
-            if (System.getProperty("headless").equals("true"))
-                options.addArguments("--headless");
+            options.addArguments("--headless");
             driver = new ChromeDriver(options);
-        } else if(System.getProperty("browser", "chrome").equalsIgnoreCase("firefox")) {
+        } else if (browser.equalsIgnoreCase("firefox")) {
+            WebDriverManager.firefoxdriver().setup();
             driver = new FirefoxDriver();
         }
-
 
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
