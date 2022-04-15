@@ -1,15 +1,16 @@
 pipeline {
     agent any
 
-    parameters {
-     gitParameter branchFilter: 'origin/(.*)', defaultValue: 'master', name: 'BRANCH', type: 'PT_BRANCH'
-    }
-
-
-    tools {
-        // Install the Maven version configured as "M3" and add it to the path.
-        maven "M3"
-    }
+   tools {
+         // Install the Maven version configured as "M3" and add it to the path.
+         maven "M3"
+      }
+       triggers {
+           cron('0 8 * * *')
+       }
+       parameters {
+           gitParameter branchFilter: 'origin/(.*)', defaultValue: 'master', name: 'BRANCH', type: 'PT_BRANCH'
+       }
 
     stages {
         stage('Test') {
