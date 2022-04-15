@@ -13,35 +13,35 @@ public class CartPage extends BasePage{
     public static final By PRODUCT_NAME = By.cssSelector(".inventory_item_name");
     public static final By PRODUCT_IN_CART = By.cssSelector(".cart_item");
     String removeProductFromCart = "//div[text()='%s']/ancestor::div[@class='cart_item']//button[text()='Remove']";
-    String removeButton = "//div[text()='%s']/ancestor::div[@class='cart_item_label']//button";
 
     public CartPage(WebDriver driver) {
         super(driver);
     }
 
-    @Test
+    @Step("Opening shopping cart")
     public void open() {
         driver.get(baseUrl + "/cart.html");
     }
 
-    @Test
+    @Step("Click on the Continue shopping button")
     public void continueShopping() {
         driver.findElement(CONTINUE_SHOPPING_BUTTON).click();
     }
 
-
-    @Test
+    @Step("Click on the Checkout button")
     public void goToCheckout() {
         driver.findElement(CHECKOUT_BUTTON).click();
     }
 
-    @Test
+    @Step("Getting the count of products in the shopping cart")
     public int getProductsCount() {
         return driver.findElements(PRODUCT_IN_CART).size();
     }
 
-    @Test
+    @Step("Removing  a product {nameProduct} from the shopping cart")
     public void removeProductFromCart(String product) {
         driver.findElement(By.xpath(String.format(removeProductFromCart, product))).click();
     }
+
+
 }

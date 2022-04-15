@@ -2,7 +2,6 @@ package tests;
 
 import org.testng.annotations.Test;
 
-import static org.testng.Assert.assertEquals;
 
 public class CartTest extends BaseTest {
 
@@ -13,8 +12,6 @@ public class CartTest extends BaseTest {
         productsPage.addToCart("Sauce Labs Backpack");
         productsPage.addToCart("Sauce Labs Bike Light");
         productsPage.addToCart("Sauce Labs Bolt T-Shirt");
-
-
     }
 
 

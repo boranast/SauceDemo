@@ -1,5 +1,6 @@
 package pages;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -14,14 +15,17 @@ public class ProductsPage extends BasePage {
         super(driver);
     }
 
+    @Step("Opening products page")
     public void open() {
         driver.get(baseUrl + "/inventory.html");
     }
 
+    @Step("Adding product {nameProduct} to shopping cart")
     public void addToCart(String product) {
         driver.findElement(By.xpath(String.format(productLocator, product))).click();
     }
 
+    @Step("Sorting products by {sort}")
     public void sort(String sorting) {
         WebElement sortingElement = driver.findElement(sort);
         new Select(sortingElement).selectByVisibleText(sorting);

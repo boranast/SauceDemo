@@ -1,5 +1,6 @@
 package pages;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
@@ -20,19 +21,19 @@ public class CheckoutPage extends BasePage {
         super(driver);
     }
 
+    @Step("Opening checkout page")
     public void open() {
         driver.get(baseUrl + "/checkout-step-one.html");
     }
-    public void openCheckoutPage() {
-        driver.findElement(CHECKOUT_BUTTON).click();
-    }
 
+    @Step("Filling in the login information: username - '{username}', password - '{password}' ")
     public void login(String user, String password) {
         driver.findElement(USER_NAME).sendKeys(user);
         driver.findElement(PASSWORD).sendKeys(password);
         driver.findElement(LOGIN_BUTTON).click();
     }
 
+    @Step("\"Filling checkout information: First Name - '{firstName}', Last Name - '{lastName}', Zip code - '{ZipCode}'\"")
     public void loginToCheckout(String first_name, String last_name, String zip_code) {
         driver.findElement(FIRST_NAME).sendKeys(first_name);
         driver.findElement(LAST_NAME).sendKeys(last_name);
@@ -41,6 +42,7 @@ public class CheckoutPage extends BasePage {
 
     }
 
+    @Step("Getting error message")
     public String getError() {
         return driver.findElement(ERROR_MESSAGE).getText();
     }
