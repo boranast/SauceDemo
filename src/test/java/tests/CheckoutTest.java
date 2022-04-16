@@ -1,34 +1,29 @@
 package tests;
 
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import static org.testng.Assert.assertEquals;
 
 
-public class CheckoutTest extends BaseTest{
+public class CheckoutTest extends BaseTest {
 
-    @Test
-    public void lastNameShouldBeRequired() {
-        loginPage.open();
-        loginPage.login("standard_user", "secret_sauce");
-        driver.get(baseUrl + "/checkout-step-one.html");
-        checkoutPage.loginToCheckout("Anastasiya","","1234");
-        assertEquals(checkoutPage.getError(),"Error: Last Name is required");
+
+    @DataProvider(name = "Incoming data for checkout test")
+    public Object[][] checkoutData() {
+        return new Object[][]{
+                {"", "test", "12345", "Error: First Name is required"},
+                {"test", "", "12345", "Error: Last Name is required"},
+                {"test", "test", "", "Error: Postal Code is required"}
+        };
     }
-    @Test
-    public void firstNameShouldBeRequired() {
+
+    @Test(description = "Проверка необходимости ввода всех персональных данных во время чекаута", dataProvider = "Incoming data for checkout test")
+    public void allDataShouldBeRequiredDuringCheckout(String firstName, String lastName, String postalCode, String error) {
         loginPage.open();
-        loginPage.login("standard_user", "secret_sauce");
+        loginPage.login(USER, PASSWORD);
         driver.get(baseUrl + "/checkout-step-one.html");
-        checkoutPage.loginToCheckout("","","");
-        assertEquals(checkoutPage.getError(),"Error: First Name is required");
-    }
-    @Test
-    public void postalCodeShouldBeRequired() {
-        loginPage.open();
-        loginPage.login("standard_user", "secret_sauce");
-        driver.get(baseUrl + "/checkout-step-one.html");
-        checkoutPage.loginToCheckout("Anastasiya","Borisova","");
-        assertEquals(checkoutPage.getError(),"Error: Postal Code is required");
+        checkoutPage.loginToCheckout(firstName, lastName, postalCode);
+        assertEquals(checkoutPage.getError(), error, "Error didn't occurred");
     }
 }

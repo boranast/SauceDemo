@@ -26,6 +26,7 @@ public class CheckoutPage extends BasePage {
         driver.get(baseUrl + "/checkout-step-one.html");
     }
 
+
     @Step("Filling in the login information: username - '{username}', password - '{password}' ")
     public void login(String user, String password) {
         driver.findElement(USER_NAME).sendKeys(user);

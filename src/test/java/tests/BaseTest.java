@@ -10,6 +10,7 @@ import org.testng.annotations.*;
 import pages.*;
 
 import java.net.MalformedURLException;
+import java.time.Duration;
 import java.util.concurrent.TimeUnit;
 
 @Listeners(TestListener.class)
@@ -22,7 +23,7 @@ public class BaseTest {
     BasePage basePage;
     CheckoutPage checkoutPage;
     String baseUrl = "https://www.saucedemo.com";
-    public static final String USER = "standart_user";
+    public static final String USER = "standard_user";
     public static final String PASSWORD = "secret_sauce";
 
     @Parameters({"browser"})
@@ -38,13 +39,15 @@ public class BaseTest {
             driver = new FirefoxDriver();
         }
 
+        testContext.setAttribute("driver", driver);
         driver.manage().window().maximize();
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
 
         loginPage = new LoginPage(driver);
         productsPage = new ProductsPage(driver);
         cartPage = new CartPage(driver);
         basePage = new BasePage(driver);
+        checkoutPage = new CheckoutPage(driver);
     }
 
     @AfterMethod(alwaysRun = true, description = "Closing Browser")
